@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/sections/PageHero";
 import ServiceMenu from "@/components/sections/ServiceMenu";
 import ServicesSection from "@/components/sections/ServicesSection";
+import BookingCta from "@/components/sections/BookingCta";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -10,13 +11,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-/** Port of services.html: the featured cards, then the shop's full price list. */
+/**
+ * Port of services.html: the featured cards, then the shop's full price list,
+ * then the booking link — the page ends where the decision does.
+ */
 export default function ServicesPage() {
   return (
     <>
       <PageHero eyebrow="What We Do" title="Services" image="/images/background/7.webp" />
       <ServicesSection />
       <ServiceMenu />
+      <BookingCta className="pt-0" />
     </>
   );
 }

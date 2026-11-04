@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import Parallax from "@/components/ui/Parallax";
 import Reveal from "@/components/ui/Reveal";
-import { heroStatic } from "@/lib/site";
+import { heroStatic, site } from "@/lib/site";
 
 /** index-dark-static-image.html's hero: parallax still, copy block and social proof. */
 export default function HeroStaticImage() {
@@ -30,9 +29,15 @@ export default function HeroStaticImage() {
               </Reveal>
 
               <Reveal className="d-flex align-items-center" delay={0.45}>
-                <Link className="btn-main fx-slide me-4" href="#section-booking">
+                <a
+                  className="btn-main fx-slide me-4"
+                  data-hover="Book Now"
+                  href={site.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <span>Book Now</span>
-                </Link>
+                </a>
               </Reveal>
 
               <div className="spacer-double" />

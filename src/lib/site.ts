@@ -8,6 +8,12 @@ export const site = {
   description:
     "We craft precision haircuts, signature beard grooming, and refined styling that elevate your confidence through expert craftsmanship and timeless barbering tradition.",
   email: "crafted.studio@outlook.com",
+  /**
+   * Phorest, the shop's booking system. Bookings are not handled on this site,
+   * so every "Book" button is an external link to here rather than a route —
+   * change this one string if the shop ever moves booking system.
+   */
+  bookingUrl: "https://phorest.com/book/salons/craftedstudio",
   address: {
     line1: "2003-1480 Dakota Street",
     line2: "Winnipeg, Manitoba R2N 3Y7",

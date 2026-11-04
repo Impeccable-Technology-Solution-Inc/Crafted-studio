@@ -1,20 +1,32 @@
 import SectionHeading from "./SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { getContact, getPublicHours } from "@/lib/public-content";
+import { site } from "@/lib/site";
 
 /**
- * How to book: how to reach the shop on one side, opening hours on the other.
+ * How to book: the booking card on one side, opening hours on the other.
  *
- * Bookings are going to a separate system the client is still choosing, so this
- * is deliberately a way to get in touch rather than a form — a page that asks
- * for a phone call is honest, where a form that goes nowhere is not. When that
- * system is picked, these buttons become a link to it and the rest stays put.
+ * Bookings live in Phorest (site.bookingUrl), not on this site, so there is one
+ * primary action here and it leaves the site. Everything else on the card —
+ * phone, email, address — is deliberately quieter than that button, so the
+ * booking link is the obvious thing to click.
  */
-export default async function BookingSection({ withHeading = false }: { withHeading?: boolean }) {
+export default async function BookingSection({
+  withHeading = false,
+  className = "",
+}: {
+  withHeading?: boolean;
+  /** Spacing override — the homepage runs the marquee straight after it. */
+  className?: string;
+}) {
   const [hours, contact] = await Promise.all([getPublicHours(), getContact()]);
 
   return (
-    <section id="section-booking" className="pb-0 text-light" aria-label="Book an appointment">
+    <section
+      id="section-booking"
+      className={`text-light ${className}`}
+      aria-label="Book an appointment"
+    >
       <div className="container">
         {withHeading ? (
           <div className="row g-4">
@@ -30,56 +42,84 @@ export default async function BookingSection({ withHeading = false }: { withHead
           </div>
         ) : null}
 
-        <div className="row g-4 gx-5">
-          <Reveal className="col-lg-6" animation="fadeInLeft" duration={0.9}>
-            <h4 className="mb-3">Get in touch</h4>
-            <p className="mb-4">
-              Tell us the service you would like and a time that suits you, and we will confirm
-              your chair.
-            </p>
+        <div className="row g-4">
+          <Reveal className="col-lg-7" animation="fadeInLeft" duration={0.9}>
+            <div className="h-100 p-5 p-md-4 bg-dark-2 rounded-1">
+              <i className="icofont-ui-calendar id-color fs-40 mb-3 d-block" aria-hidden="true" />
 
-            {contact.phone ? (
-              <Reveal delay={0.2} className="mb-3">
-                <a className="btn-main fx-slide" href={`tel:${contact.phone.replace(/\s/g, "")}`}>
-                  <span>Call {contact.phone}</span>
-                </a>
-              </Reveal>
-            ) : null}
+              <h3 className="mb-3">Reserve your chair online</h3>
 
-            <Reveal delay={0.3}>
-              <a className="btn-main fx-slide" href={`mailto:${contact.email}`}>
-                <span>Email us</span>
+              <p className="mb-4">
+                Pick your service, choose a time that suits you and confirm — our booking system
+                shows what is actually free, so you are never waiting on a callback.
+              </p>
+
+              <a
+                className="btn-main fx-slide"
+                data-hover="Book Appointment"
+                href={site.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Book Appointment</span>
               </a>
-            </Reveal>
 
-            <Reveal delay={0.4} className="mt-4">
-              <address className="fst-normal mb-0">
-                {contact.line1}
-                <br />
-                {contact.line2}
-              </address>
-            </Reveal>
+              <p className="fs-14 op-6 mt-3 mb-0">Opens our booking system in a new tab.</p>
+
+              <hr className="my-4 op-3" />
+
+              <p className="fs-14 op-6 mb-2">Would rather not book online?</p>
+
+              <ul className="list-unstyled mb-0">
+                {contact.phone ? (
+                  <li className="mb-2">
+                    <i className="icofont-phone id-color me-2" aria-hidden="true" />
+                    <a
+                      className="text-light text-decoration-none"
+                      href={`tel:${contact.phone.replace(/\s/g, "")}`}
+                    >
+                      {contact.phone}
+                    </a>
+                  </li>
+                ) : null}
+
+                <li>
+                  <i className="icofont-email id-color me-2" aria-hidden="true" />
+                  <a className="text-light text-decoration-none" href={`mailto:${contact.email}`}>
+                    {contact.email}
+                  </a>
+                </li>
+              </ul>
+            </div>
           </Reveal>
 
-          <Reveal className="col-lg-6" animation="fadeInRight" duration={0.9}>
-            <div className="mx-lg-2">
-              <div className="bg-none text-light">
+          <Reveal className="col-lg-5" animation="fadeInRight" duration={0.9}>
+            <div className="h-100 p-5 p-md-4 bg-dark-2 rounded-1">
+              <i className="icofont-clock-time id-color fs-40 mb-3 d-block" aria-hidden="true" />
+
+              <h4 className="mb-3">Opening hours</h4>
+
+              <div className="mb-4">
                 {hours.map((entry, i) => {
                   const last = i === hours.length - 1;
                   return (
-                    <Reveal
+                    <div
                       key={entry.day}
-                      delay={0.2 + i * 0.1}
-                      className={`bg-none d-flex justify-content-between align-items-center ${
-                        last ? "pt-3" : "py-3 border-bottom border-secondary"
+                      className={`d-flex justify-content-between align-items-center ${
+                        last ? "pt-2" : "py-2 border-bottom border-secondary"
                       }`}
                     >
                       <span className="text-white">{entry.day}</span>
                       <span className={entry.closed ? "text-warning" : "fw-500"}>{entry.value}</span>
-                    </Reveal>
+                    </div>
                   );
                 })}
               </div>
+
+              <i className="icofont-location-pin id-color me-2" aria-hidden="true" />
+              <address className="fst-normal d-inline mb-0">
+                {contact.line1}, {contact.line2}
+              </address>
             </div>
           </Reveal>
         </div>

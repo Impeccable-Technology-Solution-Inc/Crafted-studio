@@ -22,7 +22,7 @@ export default function HomeBody() {
       <TeamSection withHeading />
       <LocationSection />
       <GallerySection withHeading className="pb-0" />
-      <BookingSection withHeading />
+      <BookingSection withHeading className="pb-0" />
       <MarqueeBand />
     </>
   );

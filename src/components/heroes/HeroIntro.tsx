@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import RotatingHeadline from "@/components/ui/RotatingHeadline";
 import { heroHeadlines, site } from "@/lib/site";
@@ -60,9 +59,15 @@ export default function HeroIntro({
             </Reveal>
 
             <Reveal className={ctaCols} delay={0.45} duration={0.8}>
-              <Link href="#section-booking" className="btn-main fx-slide">
+              <a
+                href={site.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-main fx-slide"
+                data-hover={ctaLabel}
+              >
                 <span>{ctaLabel}</span>
-              </Link>
+              </a>
             </Reveal>
           </div>
         </div>

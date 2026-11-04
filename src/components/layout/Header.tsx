@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/lib/hooks";
-import { nav } from "@/lib/site";
+import { nav, site } from "@/lib/site";
 
 /**
  * Replaces the header half of designesia.js: the `smaller` sticky class, the
@@ -123,8 +123,36 @@ export default function Header({ onepage = false }: { onepage?: boolean }) {
                         </li>
                       );
                     })}
+
+                    {/* Booking lives off-site, so the drawer gets its own button
+                        rather than a menu item that quietly leaves. */}
+                    <li className="d-lg-none mt-3">
+                      <a
+                        className="btn-main fx-slide"
+                        data-hover="Book Now"
+                        href={site.bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={closeMenu}
+                      >
+                        <span>Book Now</span>
+                      </a>
+                    </li>
                   </ul>
                 </nav>
+              </div>
+
+              {/* Booking CTA — always one click away, on every page. */}
+              <div className="de-flex-col d-none d-lg-block">
+                <a
+                  className="btn-main fx-slide"
+                  data-hover="Book Now"
+                  href={site.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Book Now</span>
+                </a>
               </div>
 
               {/* Mobile menu button */}

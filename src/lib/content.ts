@@ -265,6 +265,6 @@ export const contact = {
   "name": "Crafted Studio",
   "line1": "2003-1480 Dakota Street",
   "line2": "Winnipeg, Manitoba R2N 3Y7",
-  "email": "aprita@itsinc.ca",
+  "email": "crafted.studio@outlook.com",
   "phone": ""
 };

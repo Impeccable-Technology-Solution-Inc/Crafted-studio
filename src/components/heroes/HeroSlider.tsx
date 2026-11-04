@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "@/components/ui/Slider";
-import { heroSlideCaption, heroSlides } from "@/lib/site";
+import { heroSlideCaption, heroSlides, site } from "@/lib/site";
 
 /**
  * index-dark-slider.html's hero: a full-bleed Swiper whose caption elements
@@ -51,16 +51,23 @@ export default function HeroSlider() {
                         <div className="spacer-half" />
 
                         <div className="animated anim-order-4">
-                          <Link className="btn-main fx-slide animate-item" href="#section-services">
+                          <Link
+                            className="btn-main fx-slide animate-item"
+                            href="#section-services"
+                            data-hover="Our Services"
+                          >
                             <span>Our Services</span>
                           </Link>
                           &nbsp;&nbsp;
-                          <Link
+                          <a
                             className="btn-main btn-line fx-slide animate-item"
-                            href="#section-booking"
+                            data-hover="Book Now"
+                            href={site.bookingUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <span>Book Now</span>
-                          </Link>
+                          </a>
                         </div>
                       </div>
                     </div>
