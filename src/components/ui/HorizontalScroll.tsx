@@ -19,17 +19,11 @@ export default function HorizontalScroll({
   className = "",
   id,
   style,
-  fadeOut = true,
-  watermark,
 }: {
   children: ReactNode;
   className?: string;
   id?: string;
   style?: React.CSSProperties;
-  /** The homepage track fades near the end; /about's timeline does not. */
-  fadeOut?: boolean;
-  /** Large faded word behind the band — "our history" on /about. */
-  watermark?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -62,8 +56,10 @@ export default function HorizontalScroll({
           },
         });
 
-        if (!fadeOut) return;
-
+        // The track fades out over the last quarter of its travel, as in the
+        // template. This used to be optional, for the /about timeline, which
+        // held its panels to the end; that band has gone and the reviews are
+        // the only caller left, so the fade is unconditional again.
         gsap.to(track, {
           opacity: 0,
           ease: "none",
@@ -95,8 +91,6 @@ export default function HorizontalScroll({
           </div>
         </div>
       </div>
-
-      {watermark ? <div className="wm abs-center">{watermark}</div> : null}
     </section>
   );
 }

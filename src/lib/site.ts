@@ -280,7 +280,6 @@ export const marqueeItems = [
   "Modern Barber",
 ] as const;
 
-/** The "our history" band on /about — a horizontally scrolled timeline. */
 /**
  * What a first-time visitor can expect, on /about. Placeholder wording until
  * the shop supplies its own — nothing here is a claim the site can verify.
@@ -308,32 +307,17 @@ export const values = [
   },
 ] as const;
 
-export const history = [
-  {
-    year: "1998",
-    title: "First Chair",
-    body: "It all started with a single chair, a pair of sharp scissors, and a passion for timeless barbering. From the very beginning, our focus was simple: great cuts, honest craft, and a welcoming experience.",
-    image: "/images/misc/s1.webp",
-  },
-  {
-    year: "2005",
-    title: "The First Studio",
-    body: "Seven years later, we opened our first dedicated studio. A place where traditional barbering met a refined atmosphere, bringing craftsmanship, conversation, and community together.",
-    image: "/images/misc/s2.webp",
-  },
-  {
-    year: "2015",
-    title: "A New Generation",
-    body: "New barbers joined the journey, bringing fresh ideas and contemporary techniques while keeping the traditions that defined the shop at the heart of every cut.",
-    image: "/images/misc/s3.webp",
-  },
-  {
-    year: "2026",
-    title: "Crafted Studio Today",
-    body: "Today the shop continues to evolve without losing sight of where it began. Classic techniques, modern style, and attention to every detail remain at the core of what we do.",
-    image: "/images/misc/s4.webp",
-  },
-] as const;
+/*
+ * There was a `history` timeline here — 1998 "First Chair", 2005, 2015, and
+ * "Crafted Studio Today" — rendered by HistorySection on /about. Every date in
+ * it was the template's, describing a shop that never existed, so renaming the
+ * business inside it only made the fiction harder to spot. Data, section and
+ * the /about hero's "Since 1998" are all gone.
+ *
+ * If the shop wants a real timeline, write it from real dates; the pinned
+ * side-scrolling band it used is still in HorizontalScroll, which the reviews
+ * section drives.
+ */
 
 /** Headlines the default hero cycles through — a sample of the shop's services. */
 export const heroHeadlines = [
