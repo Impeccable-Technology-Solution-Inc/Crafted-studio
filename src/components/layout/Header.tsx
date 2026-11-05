@@ -126,24 +126,33 @@ export default function Header({ onepage = false }: { onepage?: boolean }) {
 
                     {/* Booking lives off-site, so the drawer gets its own button
                         rather than a menu item that quietly leaves. */}
-                    <li className="d-lg-none mt-3">
+                    <li className="header-narrow-only mt-3">
+                      {/* No fx-slide here, and no inner span: the drawer styles
+                          `#mainmenu a span` as the menu underline (width: 0),
+                          which eats the button's label. A hover animation is no
+                          use on touch anyway. The utilities are !important, so
+                          they win back the padding `#mainmenu a` would impose. */}
                       <a
-                        className="btn-main fx-slide"
-                        data-hover="Book Now"
+                        className="btn-main d-block text-center px-4 py-3"
                         href={site.bookingUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={closeMenu}
                       >
-                        <span>Book Now</span>
+                        Book Now
                       </a>
                     </li>
                   </ul>
                 </nav>
               </div>
 
-              {/* Booking CTA — always one click away, on every page. */}
-              <div className="de-flex-col d-none d-lg-block">
+              {/* Booking CTA — always one click away, on every page.
+                  header-wide-only rather than a `d-lg-*` utility: it switches on
+                  the template's own breakpoint (see globals.css), and it only
+                  ever hides, so .de-flex-col keeps centring the button. A
+                  Bootstrap display utility is !important and would drop that
+                  centring, leaving the button sitting above the logo. */}
+              <div className="de-flex-col header-wide-only">
                 <a
                   className="btn-main fx-slide"
                   data-hover="Book Now"
@@ -156,7 +165,7 @@ export default function Header({ onepage = false }: { onepage?: boolean }) {
               </div>
 
               {/* Mobile menu button */}
-              <div className="de-flex-col d-lg-none">
+              <div className="de-flex-col header-narrow-only">
                 <div className="menu_side_area">
                   <button
                     type="button"

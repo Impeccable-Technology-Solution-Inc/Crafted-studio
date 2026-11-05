@@ -58,7 +58,14 @@ export default function HeroIntro({
               <RotatingHeadline items={heroHeadlines} className="fs-120 fs-sm-10vw" />
             </Reveal>
 
-            <Reveal className={ctaCols} delay={0.45} duration={0.8}>
+            {/* d-flex, not the default block: an inline-block button leaves a
+                line-box descender gap beneath it, which floated it ~9px above
+                the headline the row is meant to bottom-align it with. */}
+            <Reveal
+              className={`${ctaCols} d-flex align-items-end justify-content-lg-end`}
+              delay={0.45}
+              duration={0.8}
+            >
               <a
                 href={site.bookingUrl}
                 target="_blank"

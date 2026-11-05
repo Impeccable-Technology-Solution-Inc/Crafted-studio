@@ -56,6 +56,56 @@ section {
 }
 
 /* --------------------------------------------------
+ * Header breakpoint
+ *
+ * The template collapses to the drawer at `max-width: 992px`, while Bootstrap's
+ * `lg` utilities start at `min-width: 992px`. Both match at exactly 992px, so a
+ * header built out of `d-lg-*` has a one-pixel-wide window where the drawer
+ * styles are live but the toggle that opens it is already hidden — at that
+ * width the menu cannot be reached at all.
+ *
+ * These switch on the template's own boundary instead, so the drawer, its
+ * toggle and the booking button always agree about which mode the header is in.
+ * Each rule only ever sets `display: none`; the visible state is left to the
+ * element's own styling (`.de-flex > .de-flex-col` is a centred flex box, the
+ * drawer's button is a plain list item). Matching `.de-flex >` keeps the
+ * specificity level with that rule, and this file loads last, so it wins.
+ * -------------------------------------------------- */
+@media only screen and (max-width: 992px) {
+  .de-flex > .header-wide-only {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .de-flex > .header-narrow-only,
+  #mainmenu > .header-narrow-only {
+    display: none;
+  }
+}
+
+/*
+ * The CTA label is two words and must stay on one line: the header row is a
+ * flex box, so a wrapping label makes the button taller than the row expects
+ * and it stops lining up with the logo.
+ */
+.de-flex > .header-wide-only .btn-main {
+  white-space: nowrap;
+}
+
+/*
+ * Just above the drawer breakpoint the logo, eight nav items and the CTA want
+ * ~910px of a ~880px row, which squeezed the button until its label wrapped.
+ * The nav carries 30px between items there; 18px buys back ~96px, which is
+ * more than enough, and the spacing is back to normal by 1200px.
+ */
+@media only screen and (min-width: 993px) and (max-width: 1199px) {
+  #mainmenu > li {
+    margin-right: 18px;
+  }
+}
+
+/* --------------------------------------------------
  * Elements the port renders as buttons
  *
  * Several things the template wrote as <a> or <input> are <button> here, because
