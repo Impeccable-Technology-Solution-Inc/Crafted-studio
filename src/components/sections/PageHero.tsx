@@ -7,7 +7,8 @@ import Reveal from "@/components/ui/Reveal";
  * optional parallax backdrop. One component replaces the block that was
  * copy-pasted into all eight inner pages of the template.
  *
- * `/reviews` is the one page that omits the backdrop, so `image` is optional.
+ * `image` is optional: the template also ships a flat subheader with no
+ * backdrop, which is what you get by leaving it off.
  */
 export default function PageHero({
   eyebrow,

@@ -44,7 +44,6 @@ export const nav = [
   { label: "Home", href: "/", section: "#section-intro" },
   { label: "About Us", href: "/about", section: "#section-about" },
   { label: "Services", href: "/services", section: "#section-services" },
-  { label: "Reviews", href: "/reviews", section: "#section-reviews" },
   { label: "Team", href: "/team", section: "#section-team" },
   { label: "Gallery", href: "/gallery", section: "#section-gallery" },
   { label: "Booking", href: "/booking", section: "#section-booking" },
@@ -239,7 +238,7 @@ export const testimonials = [
   },
 ] as const;
 
-/** The four testimonials the homepage shows; /reviews shows all six. */
+/** The four testimonials the homepage shows, from the six written below. */
 export const homeTestimonials = testimonials.slice(0, 4);
 
 export const gallery = [
