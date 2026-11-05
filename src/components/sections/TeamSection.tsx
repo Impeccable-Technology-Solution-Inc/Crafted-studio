@@ -2,6 +2,15 @@ import TeamCard from "@/components/cards/TeamCard";
 import SectionHeading from "./SectionHeading";
 import { team } from "@/lib/site";
 
+/**
+ * Currently mounted nowhere. Sam, Leo and Max and their portraits are the
+ * template's, and /team was a page of three strangers; the section came out of
+ * HomeBody and the page with it, rather than showing invented staff. Restore
+ * it by re-adding `<TeamSection withHeading />` to HomeBody and, if the shop
+ * wants the page back, re-creating app/(main)/team/page.tsx — both are in the
+ * history of the commit that removed them. Replace `team` in lib/site.ts and
+ * the images under public/images/team/ first.
+ */
 export default function TeamSection({
   withHeading = false,
   className,

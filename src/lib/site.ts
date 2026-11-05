@@ -18,12 +18,19 @@ export const site = {
     line1: "2003-1480 Dakota Street",
     line2: "Winnipeg, Manitoba R2N 3Y7",
   },
-  founder: {
-    name: "Samuel Barberon",
-    role: "Founder & Master Barber",
-  },
   copyright: "Copyright © 2026 Crafted Studio. All Rights Reserved.",
 } as const;
+
+/**
+ * A `tel:` URI for a number written the way the shop writes it.
+ *
+ * RFC 3966 wants digits (and a leading +), not "(204) 952-4150" — the brackets
+ * and the space are display formatting. Android dialers in particular can drop
+ * everything after an unexpected character, so the displayed number and the
+ * dialled one are built separately: this takes the display string and keeps
+ * only what can be dialled.
+ */
+export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const social = [
   {
@@ -44,7 +51,6 @@ export const nav = [
   { label: "Home", href: "/", section: "#section-intro" },
   { label: "About Us", href: "/about", section: "#section-about" },
   { label: "Services", href: "/services", section: "#section-services" },
-  { label: "Team", href: "/team", section: "#section-team" },
   { label: "Gallery", href: "/gallery", section: "#section-gallery" },
   { label: "Booking", href: "/booking", section: "#section-booking" },
   { label: "Blog", href: "/blog", section: "/blog" },
@@ -53,7 +59,6 @@ export const nav = [
 export const footerNav = [
   { label: "About", section: "#section-about" },
   { label: "Services", section: "#section-services" },
-  { label: "Team", section: "#section-team" },
   { label: "Gallery", section: "#section-gallery" },
   { label: "Booking", section: "#section-booking" },
 ] as const;
@@ -166,6 +171,13 @@ export const featuredServices = [
   number: String(i + 1).padStart(2, "0"),
 }));
 
+/**
+ * Not rendered anywhere at the moment: the names and the photographs are both
+ * the template's, and dummy barbers on a real shop's site are worse than no
+ * barbers at all. Kept, with TeamSection and TeamCard, so putting the real
+ * team back is a matter of swapping these entries and their images and
+ * re-mounting the section — see TeamSection for where it came out.
+ */
 export const team = [
   {
     name: "Sam",
@@ -190,7 +202,7 @@ export const team = [
 export const testimonials = [
   {
     quote:
-      "Barberon never disappoints. The atmosphere is relaxed, the service is excellent, and the haircut always comes out looking fresh. Definitely my new favorite barbershop in town.",
+      "Crafted Studio never disappoints. The atmosphere is relaxed, the service is excellent, and the haircut always comes out looking fresh. Definitely my new favorite barbershop in town.",
     name: "Michael Harris",
     service: "Classic Haircut",
     rating: "5.0",
@@ -206,7 +218,7 @@ export const testimonials = [
   },
   {
     quote:
-      "I had an amazing experience at Barberon. The staff was welcoming, the shop looked great, and my haircut turned out better than expected. I’ll definitely be coming back again soon.",
+      "I had an amazing experience at Crafted Studio. The staff was welcoming, the shop looked great, and my haircut turned out better than expected. I’ll definitely be coming back again soon.",
     name: "James Wilson",
     service: "Premium Styling",
     rating: "5.0",
@@ -214,7 +226,7 @@ export const testimonials = [
   },
   {
     quote:
-      "If you’re looking for a professional barbershop, Barberon is the place to go. Excellent attention to detail, great conversation, and a haircut that looks fresh for days.",
+      "If you’re looking for a professional barbershop, Crafted Studio is the place to go. Excellent attention to detail, great conversation, and a haircut that looks fresh for days.",
     name: "Ethan Brooks",
     service: "Skin Fade",
     rating: "5.0",
@@ -230,7 +242,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Great atmosphere, skilled barbers, and an even better cut. Barberon has become my go-to place for a proper haircut, and the experience is always worth the visit.",
+      "Great atmosphere, skilled barbers, and an even better cut. Crafted Studio has become my go-to place for a proper haircut, and the experience is always worth the visit.",
     name: "James Wilson",
     service: "Beard Trim",
     rating: "5.0",
@@ -306,19 +318,19 @@ export const history = [
   {
     year: "2005",
     title: "The First Studio",
-    body: "Seven years later, Barberon opened its first dedicated studio. A place where traditional barbering met a refined atmosphere, bringing craftsmanship, conversation, and community together.",
+    body: "Seven years later, we opened our first dedicated studio. A place where traditional barbering met a refined atmosphere, bringing craftsmanship, conversation, and community together.",
     image: "/images/misc/s2.webp",
   },
   {
     year: "2015",
     title: "A New Generation",
-    body: "New barbers joined the journey, bringing fresh ideas and contemporary techniques while keeping the traditions that defined Barberon at the heart of every cut.",
+    body: "New barbers joined the journey, bringing fresh ideas and contemporary techniques while keeping the traditions that defined the shop at the heart of every cut.",
     image: "/images/misc/s3.webp",
   },
   {
     year: "2026",
-    title: "Barberon Today",
-    body: "Today, Barberon continues to evolve without losing sight of where it began. Classic techniques, modern style, and attention to every detail remain at the core of what we do.",
+    title: "Crafted Studio Today",
+    body: "Today the shop continues to evolve without losing sight of where it began. Classic techniques, modern style, and attention to every detail remain at the core of what we do.",
     image: "/images/misc/s4.webp",
   },
 ] as const;

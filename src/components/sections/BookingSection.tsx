@@ -1,7 +1,7 @@
 import SectionHeading from "./SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { getContact, getPublicHours } from "@/lib/public-content";
-import { site } from "@/lib/site";
+import { site, telHref } from "@/lib/site";
 
 /**
  * How to book: the booking card on one side, opening hours on the other.
@@ -74,10 +74,7 @@ export default async function BookingSection({
                 {contact.phone ? (
                   <li className="mb-2">
                     <i className="icofont-phone id-color me-2" aria-hidden="true" />
-                    <a
-                      className="text-light text-decoration-none"
-                      href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                    >
+                    <a className="text-light text-decoration-none" href={telHref(contact.phone)}>
                       {contact.phone}
                     </a>
                   </li>

@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import RotatingHeadline from "@/components/ui/RotatingHeadline";
 import { heroHeadlines, site } from "@/lib/site";
 
 /**
- * The founder blurb + rotating headline + CTA that three of the four homepage
+ * The shop blurb + rotating headline + CTA that three of the four homepage
  * heroes share. Each variant supplies its own backdrop and column widths.
  */
 export default function HeroIntro({
@@ -21,28 +20,14 @@ export default function HeroIntro({
       <div className="container relative z-2">
         <div className="row g-4">
           <Reveal className="col-md-4" duration={0.8}>
+            {/* The template closed this block with a handwritten signature and
+                the founder's name and title. Both were its own invention, and
+                on a short phone the extra ~140px ran the block into the
+                headline below, which is positioned against the bottom of the
+                viewport rather than after this one. */}
             <div className="border-start color ps-5">
-              <Reveal as="p" className="mb-4" delay={0.1}>
+              <Reveal as="p" className="mb-0" delay={0.1}>
                 {site.description}
-              </Reveal>
-
-              <Reveal delay={0.2}>
-                <Image
-                  src="/images/misc/signature.webp"
-                  className="w-100"
-                  alt={`${site.founder.name}'s signature`}
-                  width={1658}
-                  height={459}
-                  priority
-                />
-              </Reveal>
-
-              <Reveal as="h4" className="mb-0" delay={0.3}>
-                {site.founder.name}
-              </Reveal>
-
-              <Reveal as="small" className="op-6" delay={0.4}>
-                {site.founder.role}
               </Reveal>
             </div>
 

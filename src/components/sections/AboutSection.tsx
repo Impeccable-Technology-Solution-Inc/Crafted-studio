@@ -49,9 +49,22 @@ export default function AboutSection({ className = "pb-0 relative" }: { classNam
                 where you always leave looking sharp and feeling your absolute best.
               </Reveal>
 
-              <Reveal animation="zoomIn" delay={0.7} duration={0.8} className="abs bottom-0 end-0">
+              {/* sm-hide on the whole decoration, not just the circle. The
+                  template hid the circle at ≤992px and left the logo mark
+                  behind it, which `ms-4` then pushed ~55px off the right edge
+                  of a phone — a half-cropped mark with nothing around it. */}
+              <Reveal
+                animation="zoomIn"
+                delay={0.7}
+                duration={0.8}
+                className="abs bottom-0 end-0 sm-hide"
+              >
+                {/* The template's wording was "CRAFTED FOR MODERN GENTLEMEN".
+                    The shop cuts, colours and treats hair for women too — a
+                    good half of the price list — so the circle no longer
+                    addresses only half of it. */}
                 <TextCircle
-                  text="CRAFTED FOR MODERN GENTLEMEN "
+                  text="CRAFTED FOR EVERY MODERN STYLE "
                   className="abs-middle ms-lg-5 sm-hide"
                 />
                 <div className="abs abs-centered ms-4">

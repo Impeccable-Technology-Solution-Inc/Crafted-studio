@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { footerNav, site, social } from "@/lib/site";
+import { footerNav, site, social, telHref } from "@/lib/site";
 import { getContact, getPublicHours } from "@/lib/public-content";
 
 /**
@@ -93,10 +93,7 @@ export default async function Footer({ onepage = false }: { onepage?: boolean })
                 <>
                   <br />
                   <br />
-                  <a
-                    href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                    className="text-decoration-none"
-                  >
+                  <a href={telHref(contact.phone)} className="text-decoration-none">
                     {contact.phone}
                   </a>
                 </>

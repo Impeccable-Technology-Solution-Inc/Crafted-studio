@@ -266,5 +266,5 @@ export const contact = {
   "line1": "2003-1480 Dakota Street",
   "line2": "Winnipeg, Manitoba R2N 3Y7",
   "email": "crafted.studio@outlook.com",
-  "phone": ""
+  "phone": "(204) 952-4150"
 };

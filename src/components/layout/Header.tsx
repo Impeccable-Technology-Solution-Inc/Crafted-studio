@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/lib/hooks";
-import { nav, site } from "@/lib/site";
+import { nav, site, telHref } from "@/lib/site";
 
 /**
  * Replaces the header half of designesia.js: the `smaller` sticky class, the
@@ -15,7 +15,14 @@ import { nav, site } from "@/lib/site";
  * The template's own CSS still does every bit of the styling; this only decides
  * which classes are on.
  */
-export default function Header({ onepage = false }: { onepage?: boolean }) {
+export default function Header({
+  onepage = false,
+  phone = "",
+}: {
+  onepage?: boolean;
+  /** The shop's number, from lib/content via the layout. "" hides the link. */
+  phone?: string;
+}) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,6 +69,8 @@ export default function Header({ onepage = false }: { onepage?: boolean }) {
   const headerStyle = drawerOpen ? { height: "100vh" } : undefined;
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+
+  const tel = telHref(phone);
 
   return (
     <header className={headerClass} style={headerStyle}>
@@ -142,6 +151,20 @@ export default function Header({ onepage = false }: { onepage?: boolean }) {
                         Book Now
                       </a>
                     </li>
+
+                    {/* Calling is the one thing a phone is already holding. */}
+                    {phone ? (
+                      <li className="header-narrow-only header-phone-drawer">
+                        <a
+                          className="d-block text-center px-4 py-3 text-light text-decoration-none"
+                          href={tel}
+                          onClick={closeMenu}
+                        >
+                          <i className="icofont-phone id-color me-2" aria-hidden="true" />
+                          {phone}
+                        </a>
+                      </li>
+                    ) : null}
                   </ul>
                 </nav>
               </div>
@@ -153,15 +176,28 @@ export default function Header({ onepage = false }: { onepage?: boolean }) {
                   Bootstrap display utility is !important and would drop that
                   centring, leaving the button sitting above the logo. */}
               <div className="de-flex-col header-wide-only">
-                <a
-                  className="btn-main fx-slide"
-                  data-hover="Book Now"
-                  href={site.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>Book Now</span>
-                </a>
+                <div className="d-flex align-items-center gap-3">
+                  {/* The number only appears once the row has room for it
+                      (see header-phone in globals.css): between the drawer
+                      breakpoint and 1200px the logo, nav and button already
+                      fill the width. It is in the drawer at every size. */}
+                  {phone ? (
+                    <a className="header-phone text-light text-decoration-none" href={tel}>
+                      <i className="icofont-phone id-color me-2" aria-hidden="true" />
+                      {phone}
+                    </a>
+                  ) : null}
+
+                  <a
+                    className="btn-main fx-slide"
+                    data-hover="Book Now"
+                    href={site.bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Book Now</span>
+                  </a>
+                </div>
               </div>
 
               {/* Mobile menu button */}

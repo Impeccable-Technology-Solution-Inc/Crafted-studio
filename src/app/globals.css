@@ -105,6 +105,40 @@ section {
   }
 }
 
+/*
+ * The shop's phone number, beside the booking button.
+ *
+ * That band from 993 to 1199px has no room to spare — it is the width the
+ * rule above already had to claw space back at — so the number waits until
+ * 1200px, where there is room for it without squeezing the nav or the button.
+ * Below the drawer breakpoint it is in the drawer instead, so it is reachable
+ * at every width; the only gap is a desktop window narrower than 1200px,
+ * where the footer and the booking page still carry it.
+ */
+.de-flex > .header-wide-only .header-phone {
+  display: none;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 1200px) {
+  .de-flex > .header-wide-only .header-phone {
+    display: inline-block;
+  }
+}
+
+/*
+ * The email address is one unbreakable 26-character token, and the footer puts
+ * it in a `col-6` — about 165px on a 360px phone — so it ran ~55px past the
+ * edge of the screen and was clipped mid-word by `body { overflow-x: hidden }`.
+ * Long words may break inside the blocks that carry contact details; normal
+ * prose elsewhere is unaffected.
+ */
+footer address,
+#section-booking address,
+#section-booking .list-unstyled a {
+  overflow-wrap: break-word;
+}
+
 /* --------------------------------------------------
  * Elements the port renders as buttons
  *

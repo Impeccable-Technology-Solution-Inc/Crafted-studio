@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import BlogCard from "@/components/cards/BlogCard";
 import PageHero from "@/components/sections/PageHero";
-import Pagination from "@/components/ui/Pagination";
 import { posts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -19,15 +18,13 @@ export default function BlogPage() {
       <section aria-label="Blog posts">
         <div className="container">
           <div className="row g-4">
+            {/* No pagination: there are four posts and one page of them. The
+                template's 1-2-3 control was a design placeholder with every
+                link inert, which on a four-post blog reads as two missing
+                pages. Bring one back when the list actually outgrows a page. */}
             {posts.map((post) => (
               <BlogCard key={post.slug} post={post} />
             ))}
-
-            <div className="col-lg-12 pt-4 text-center">
-              <div className="d-inline-block">
-                <Pagination />
-              </div>
-            </div>
           </div>
         </div>
       </section>
